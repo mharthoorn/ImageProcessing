@@ -1,3 +1,0 @@
-E:\Code\MyProjects\ImageUnderstanding\Application\bin\Debug\ImageApp.exe.config
-E:\Code\MyProjects\ImageUnderstanding\Application\obj\Debug\ImageApp.exe
-E:\Code\MyProjects\ImageUnderstanding\Application\obj\Debug\ImageApp.pdb
