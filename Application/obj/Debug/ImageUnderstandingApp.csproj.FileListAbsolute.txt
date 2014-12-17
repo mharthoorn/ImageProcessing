@@ -1,0 +1,10 @@
+E:\Code\MyProjects\WindowsFormsApplication1\WindowsFormsApplication1\bin\Debug\ImgUnderstanding.exe.config
+E:\Code\MyProjects\ImageUnderstanding\ImageUnderstandingApp\obj\Debug\ImageUnderstandingApp.csproj.GenerateResource.Cache
+E:\Code\MyProjects\ImageUnderstanding\ImageUnderstandingApp\obj\Debug\ImageUnderstandingApp.csprojResolveAssemblyReference.cache
+E:\Code\MyProjects\ImageUnderstanding\ImageUnderstandingApp\obj\Debug\ImageApp.Form1.resources
+E:\Code\MyProjects\ImageUnderstanding\ImageUnderstandingApp\bin\Debug\ImageApp.exe.config
+E:\Code\MyProjects\ImageUnderstanding\ImageUnderstandingApp\bin\Debug\ImageApp.exe
+E:\Code\MyProjects\ImageUnderstanding\ImageUnderstandingApp\bin\Debug\ImageApp.pdb
+E:\Code\MyProjects\ImageUnderstanding\ImageUnderstandingApp\obj\Debug\ImageProcessing.Properties.Resources.resources
+E:\Code\MyProjects\ImageUnderstanding\ImageUnderstandingApp\obj\Debug\ImageApp.exe
+E:\Code\MyProjects\ImageUnderstanding\ImageUnderstandingApp\obj\Debug\ImageApp.pdb
