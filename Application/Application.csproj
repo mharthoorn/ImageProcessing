@@ -59,8 +59,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ImageProcessing\BasicAssistFunctions.cs" />
+    <Compile Include="ImageProcessing\BasicFunctions.cs" />
     <Compile Include="ImageProcessing\ByteOperation.cs" />
     <Compile Include="ImageProcessing\Convolutions.cs" />
+    <Compile Include="ImageProcessing\FredFuncties.cs" />
     <Compile Include="ImageProcessing\ImageBuffer.cs" />
     <Compile Include="Utils\Preview.cs" />
     <Compile Include="Utils\PictureBoxExtensions.cs" />

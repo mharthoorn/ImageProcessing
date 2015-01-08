@@ -45,21 +45,23 @@ namespace ImageProcessing
             }
             return output;
         }
+         
 
-        public static ImageBuffer IntensityToColor(this ImageBuffer buffer, Color color)
+        public static ImageBuffer LuminanceToColor(this ImageBuffer buffer, Color color)
         {
             ImageBuffer output = buffer.Clone();
 
-            float intensity;
+            float luminance;
             for (int k = 0; k < buffer.Length; k += 4)
             {
-                intensity  = buffer.Bytes[k + 0] * 0.11f;
-                intensity += buffer.Bytes[k + 1] * 0.59f;
-                intensity += buffer.Bytes[k + 2] * 0.3f;
+                luminance 
+                    = (buffer.Bytes[k + 0] * 0.11f)
+                    + (buffer.Bytes[k + 1] * 0.59f)
+                    + (buffer.Bytes[k + 2] * 0.3f);
 
-                output.Bytes[k + 0] = (byte)(color.B * intensity / 255);
-                output.Bytes[k + 1] = (byte)(color.G * intensity / 255);
-                output.Bytes[k + 2] = (byte)(color.R * intensity / 255);
+                output.Bytes[k + 0] = (byte)(color.B * luminance / 255);
+                output.Bytes[k + 1] = (byte)(color.G * luminance / 255);
+                output.Bytes[k + 2] = (byte)(color.R * luminance / 255);
                 output.Bytes[k + 3] = 255;
 
             }

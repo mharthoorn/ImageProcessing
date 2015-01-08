@@ -9,20 +9,7 @@ namespace ImageProcessing
 {
     public static class SuperImpozing
     {
-        public static ImageBuffer Fill(this ImageBuffer buffer, Color color)
-        {
-            ImageBuffer output = buffer.Clone();
-            for (int k = 0; k < output.Bytes.Length; k += 4)
-            {
-                output.Bytes[k + 0] = color.B;
-                output.Bytes[k + 1] = color.G;
-                output.Bytes[k + 2] = color.R;
-                output.Bytes[k + 3] = 255;
-
-            }
-            return output;
-        }
-        
+       
         public static ImageBuffer Add(params ImageBuffer[] buffers)
         {
             ImageBuffer output = buffers[0].Clone();
@@ -39,8 +26,6 @@ namespace ImageProcessing
             }
             return output;
         }
-
-        
 
         public static ImageBuffer SuperImpoze(this ImageBuffer image, ImageBuffer impoze)
         {

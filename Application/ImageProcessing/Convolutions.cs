@@ -29,7 +29,7 @@ namespace ImageProcessing
             double blue, green, red;
 
             int width = kernel.GetLength(0);
-            int height = kernel.GetLength(1);
+            int height = kernel.GetLength(1);  // ?? wordt (nog?) niet gebruikt (20150101 FH)
 
             int matrixOffset = (width - 1) / 2;
 
@@ -121,69 +121,80 @@ namespace ImageProcessing
 
         public static ImageBuffer Laplacian3x3(this ImageBuffer buffer)
         {
-            // you should precede by grayscale 
+            // Image should be grayscale
             return buffer.Convolution(Kernel.Laplacian3x3, 1.0, 0);
         }
 
         public static ImageBuffer Laplacian5x5(this ImageBuffer buffer)
         {
-            // you should precede by grayscale 
+            // Image should be grayscale
             return buffer.Convolution(Kernel.Laplacian5x5, 1.0, 0);
         }
 
         public static ImageBuffer Laplacian7x7(this ImageBuffer buffer)
         {
+            // Image should be grayscale
             return buffer.Convolution(Kernel.Martijn7x7, 1.0, 0);
         }
 
         public static ImageBuffer LaplacianOfGaussian(this ImageBuffer buffer)
         {
-            return buffer.GrayScale().Convolution(Kernel.LaplacianOfGaussian, 1.0, 0);
+            // Image should be grayscale
+            return buffer.Convolution(Kernel.LaplacianOfGaussian, 1.0, 0);
         }
 
         public static ImageBuffer Laplacian3x3OfGaussian3x3(this ImageBuffer buffer)
         {
-            return buffer.GrayScale().Convolution(Kernel.Gaussian3x3, 1.0 / 16.0, 0).Convolution(Kernel.Laplacian3x3, 1.0, 0);
+            // Image should be grayscale
+            return buffer.Convolution(Kernel.Gaussian3x3, 1.0 / 16.0, 0).Convolution(Kernel.Laplacian3x3, 1.0, 0);
         }
 
         public static ImageBuffer Laplacian3x3OfGaussian5x5_One(this ImageBuffer buffer)
         {
-            return buffer.GrayScale().Convolution(Kernel.Gaussian5x5Type1, 1.0 / 159.0, 0).Convolution(Kernel.Laplacian3x3, 1.0, 0);
+            // Image should be grayscale
+            return buffer.Convolution(Kernel.Gaussian5x5Type1, 1.0 / 159.0, 0).Convolution(Kernel.Laplacian3x3, 1.0, 0);
         }
 
         public static ImageBuffer Laplacian3x3OfGaussian5x5_Two(this ImageBuffer buffer)
         {
-            return buffer.GrayScale().Convolution(Kernel.Gaussian5x5Type2, 1.0 / 256.0, 0).Convolution(Kernel.Laplacian3x3, 1.0, 0);
+            // Image should be grayscale
+            return buffer.Convolution(Kernel.Gaussian5x5Type2, 1.0 / 256.0, 0).Convolution(Kernel.Laplacian3x3, 1.0, 0);
         }
 
         public static ImageBuffer Laplacian5x5OfGaussian3x3(this ImageBuffer buffer)
         {
-            return buffer.GrayScale().Convolution(Kernel.Gaussian3x3, 1.0 / 16.0, 0).Convolution(Kernel.Laplacian5x5, 1.0, 0);
+            // Image should be grayscale
+            return buffer.Convolution(Kernel.Gaussian3x3, 1.0 / 16.0, 0).Convolution(Kernel.Laplacian5x5, 1.0, 0);
         }
 
         public static ImageBuffer Laplacian5x5OfGaussian5x5_One(this ImageBuffer buffer)
         {
-            return buffer.GrayScale().Convolution(Kernel.Gaussian5x5Type1, 1.0 / 159.0, 0).Convolution(Kernel.Laplacian5x5, 1.0, 0);
+            // Image should be grayscale
+            return buffer.Convolution(Kernel.Gaussian5x5Type1, 1.0 / 159.0, 0).Convolution(Kernel.Laplacian5x5, 1.0, 0);
         }
 
         public static ImageBuffer Laplacian5x5OfGaussian5x5_Two(this ImageBuffer buffer)
         {
-            return buffer.GrayScale().Convolution(Kernel.Gaussian5x5Type2, 1.0 / 256.0, 0).Convolution(Kernel.Laplacian5x5, 1.0, 0);
+            // Image should be grayscale
+            return buffer.Convolution(Kernel.Gaussian5x5Type2, 1.0 / 256.0, 0).Convolution(Kernel.Laplacian5x5, 1.0, 0);
         }
 
-        public static ImageBuffer Sobel3x3(this ImageBuffer buffer, bool gray = true)
+        public static ImageBuffer Sobel3x3(this ImageBuffer buffer)
         {
-            return buffer.When(gray, ColorReduction.GrayScale).Convolution(Kernel.Sobel3x3Horizontal, Kernel.Sobel3x3Vertical, 1.0, 0);
+            // Image should be grayscale
+            return buffer.Convolution(Kernel.Sobel3x3Horizontal, Kernel.Sobel3x3Vertical, 1.0, 0);
         }
 
-        public static ImageBuffer Prewitt(this ImageBuffer buffer, bool gray = true)
+        public static ImageBuffer Prewitt(this ImageBuffer buffer)
         {
-            return buffer.When(gray, ColorReduction.GrayScale).Convolution(Kernel.Prewitt3x3Horizontal, Kernel.Prewitt3x3Vertical, 1.0, 0);
+            // Image should be grayscale 
+            return buffer.Convolution(Kernel.Prewitt3x3Horizontal, Kernel.Prewitt3x3Vertical, 1.0, 0);
         }
 
-        public static ImageBuffer Kirsch(this ImageBuffer buffer, bool gray = true)
+        public static ImageBuffer Kirsch(this ImageBuffer buffer)
         {
-            return buffer.When(gray, ColorReduction.GrayScale).Convolution(Kernel.Kirsch3x3Horizontal, Kernel.Kirsch3x3Vertical, 1.0, 0);
+            // Image should be grayscale
+            return buffer.Convolution(Kernel.Kirsch3x3Horizontal, Kernel.Kirsch3x3Vertical, 1.0, 0);
         }
 
         public static ImageBuffer Invert(this ImageBuffer buffer)

@@ -8,9 +8,8 @@ namespace ImageApp
 {
     public partial class Form1 : Form
     {
-        // Met Fred gezamelijk directory afspreken?
-
-        Preview preview;
+        // Gezamelijke directory voor opslaan van plaatjes.
+        // Voorlopig gekozen voor ...\MyDocuments\ImageProcessing
 
         public Form1()
         {
@@ -18,8 +17,8 @@ namespace ImageApp
 
             string mydocuments = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
             string folder = Path.Combine(mydocuments, "ImageProcessing");
-            
-            preview = new Preview(this, 50, 50, folder);
+
+            Preview preview = new Preview(this, 50, 50, folder);
             preview.Show();
             preview.ImageClick += Preview_ImageClick;
         }
@@ -44,16 +43,16 @@ namespace ImageApp
         {
             ImageBuffer buffer;
 
-            buffer = original.IntensityToColor(Color.CadetBlue);
+            buffer = original.Fill(Color.Green);
             box1.Display(buffer);
 
-            buffer = original.IntensityToColor(Color.HotPink);
+            buffer = original.Fill(Css.ToColor("#8EF0FF"));
             box2.Display(buffer);
             
-            buffer = original.IntensityToColor(Color.IndianRed);
+            buffer = original.GrayScale().LuminanceToColor(Color.LawnGreen);
             box3.Display(buffer);
 
-            buffer = original.IntensityToColor(Color.LawnGreen);
+            buffer = original.LuminanceToColor(Color.LawnGreen);
             box4.Display(buffer);
         }
 
