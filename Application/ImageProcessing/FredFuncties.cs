@@ -10,7 +10,7 @@ namespace ImageProcessing
     {
         public static ImageBuffer DoeIets(this ImageBuffer input)
         {
-            return input.Copy(); 
+            return input.Clone(); 
         }
     }
 

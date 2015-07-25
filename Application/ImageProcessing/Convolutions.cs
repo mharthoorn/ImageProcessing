@@ -23,13 +23,13 @@ namespace ImageProcessing
         {
             byte[] source = buffer.Bytes;
 
-            ImageBuffer output = buffer.Clone();
+            ImageBuffer output = buffer.Fill(Color.Black);
             byte[] target = output.Bytes;
 
             double blue, green, red;
 
             int width = kernel.GetLength(0);
-            int height = kernel.GetLength(1);  // ?? wordt (nog?) niet gebruikt (20150101 FH)
+            //int height = kernel.GetLength(1);  // ?? wordt (nog?) niet gebruikt (20150101 FH)
 
             int matrixOffset = (width - 1) / 2;
 
@@ -58,9 +58,9 @@ namespace ImageProcessing
                 green = factor * green + bias;
                 red =   factor * red   + bias;
 
-                target[byteOffset + 0] = ByteOp.Bounds(blue);
-                target[byteOffset + 1] = ByteOp.Bounds(green);
-                target[byteOffset + 2] = ByteOp.Bounds(red);
+                target[byteOffset + 0] = ByteConversion.Bounded(blue);
+                target[byteOffset + 1] = ByteConversion.Bounded(green);
+                target[byteOffset + 2] = ByteConversion.Bounded(red);
                 target[byteOffset + 3] = 255;
             }
 
@@ -71,7 +71,7 @@ namespace ImageProcessing
         {
             byte[] source = buffer.Bytes;
 
-            ImageBuffer output = buffer.Clone();
+            ImageBuffer output = buffer.CloneFormat();
             byte[] target = output.Bytes;
 
             double blueX, greenX, redX, blueY, greenY, redY;
@@ -110,9 +110,9 @@ namespace ImageProcessing
                 greenTotal = Math.Sqrt((greenX * greenX) + (greenY * greenY));
                 redTotal =   Math.Sqrt((redX * redX)     + (redY * redY));
 
-                target[byteOffset + 0] = ByteOp.Bounds(blueTotal);
-                target[byteOffset + 1] = ByteOp.Bounds(greenTotal);
-                target[byteOffset + 2] = ByteOp.Bounds(redTotal);
+                target[byteOffset + 0] = ByteConversion.Bounded(blueTotal);
+                target[byteOffset + 1] = ByteConversion.Bounded(greenTotal);
+                target[byteOffset + 2] = ByteConversion.Bounded(redTotal);
                 target[byteOffset + 3] = 255;
 
             }
@@ -199,7 +199,7 @@ namespace ImageProcessing
 
         public static ImageBuffer Invert(this ImageBuffer buffer)
         {
-            ImageBuffer output = buffer.Clone();
+            ImageBuffer output = buffer.CloneFormat();
 
             for (int k = 0; k < buffer.Length; k += 4)
             {
@@ -212,8 +212,6 @@ namespace ImageProcessing
 
             return output;
         }
-
-
 
     }
 

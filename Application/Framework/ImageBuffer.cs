@@ -65,7 +65,7 @@ namespace ImageProcessing
             return bitmap;
         }
 
-        public ImageBuffer Clone()
+        public ImageBuffer CloneFormat()
         {
             ImageBuffer buffer = new ImageBuffer();
             buffer.Length = this.Length;
@@ -74,24 +74,26 @@ namespace ImageProcessing
             buffer.Stride = this.Stride;
             return buffer;
         }
+
+        public ImageBuffer Clone()
+        {
+            ImageBuffer output = this.CloneFormat();
+            for (int k = 0; k < output.Length; k += 4)
+            {
+                output.Bytes[k + 0] = this.Bytes[k + 0];
+                output.Bytes[k + 1] = this.Bytes[k + 1];
+                output.Bytes[k + 2] = this.Bytes[k + 2];
+                output.Bytes[k + 3] = this.Bytes[k + 3];
+            }
+            return output;
+        }
     }
 
    
 
     public static class BufferExtensions
     {
-        public static ImageBuffer Copy(this ImageBuffer buffer)
-        {
-            ImageBuffer output = buffer.Clone();
-            for (int k = 0; k < output.Length; k += 4)
-            {
-                output.Bytes[k + 0] = buffer.Bytes[k + 0];
-                output.Bytes[k + 1] = buffer.Bytes[k + 1];
-                output.Bytes[k + 2] = buffer.Bytes[k + 2];
-                output.Bytes[k + 3] = buffer.Bytes[k + 3];
-            }
-            return output;
-        }
+        
 
         public static ImageBuffer ToImageBuffer(this Bitmap bitmap)
         {

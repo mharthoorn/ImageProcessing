@@ -8,7 +8,7 @@ namespace ImageProcessing
         public static ImageBuffer GrayScale(this ImageBuffer buffer)
         {
             byte[] source = buffer.Bytes;
-            ImageBuffer output = buffer.Clone();
+            ImageBuffer output = buffer.CloneFormat();
             byte[] dest = output.Bytes;
 
             float rgb = 0;
@@ -30,7 +30,7 @@ namespace ImageProcessing
         public static ImageBuffer SimpleGrayScale(this ImageBuffer buffer)
         {
             byte[] source = buffer.Bytes;
-            ImageBuffer output = buffer.Clone();
+            ImageBuffer output = buffer.CloneFormat();
             byte[] dest = output.Bytes;
 
             byte rgb = 0;
@@ -45,11 +45,10 @@ namespace ImageProcessing
             }
             return output;
         }
-         
 
         public static ImageBuffer LuminanceToColor(this ImageBuffer buffer, Color color)
         {
-            ImageBuffer output = buffer.Clone();
+            ImageBuffer output = buffer.CloneFormat();
 
             float luminance;
             for (int k = 0; k < buffer.Length; k += 4)
@@ -72,7 +71,7 @@ namespace ImageProcessing
         {
             byte[] source = buffer.Bytes;
 
-            ImageBuffer output = buffer.Clone();
+            ImageBuffer output = buffer.CloneFormat();
             byte[] bytes = output.Bytes;
 
             float rgb = 0;
@@ -95,7 +94,7 @@ namespace ImageProcessing
         public static ImageBuffer NineColors(this ImageBuffer buffer)
         {
             byte[] source = buffer.Bytes;
-            ImageBuffer output = buffer.Clone();
+            ImageBuffer output = buffer.CloneFormat();
             byte[] result = output.Bytes;
 
             for (int k = 0; k < source.Length; k += 4)
@@ -112,7 +111,7 @@ namespace ImageProcessing
         {
             // Red, Green, Blue, Black or White
             byte[] source = buffer.Bytes;
-            ImageBuffer output = buffer.Clone();
+            ImageBuffer output = buffer.CloneFormat();
             byte[] result = output.Bytes;
 
             for (int k = 0; k < source.Length; k += 4)
@@ -149,10 +148,9 @@ namespace ImageProcessing
             return output;
         }
 
-
         public static ImageBuffer Filter(this ImageBuffer buffer, Color color)
         {
-            ImageBuffer output = buffer.Clone();
+            ImageBuffer output = buffer.CloneFormat();
 
             for (int k = 0; k < buffer.Bytes.Length; k += 4)
             {
@@ -166,23 +164,22 @@ namespace ImageProcessing
 
         public static ImageBuffer PureRGB(this ImageBuffer buffer, byte level, Color color)
         {
-            ImageBuffer output = buffer.Clone();
+            ImageBuffer output = buffer.CloneFormat();
 
             for (int k = 0; k < buffer.Bytes.Length; k += 4)
             {
-                output.Bytes[k + 0] = ByteOp.WhenLevel(buffer.Bytes[k + 0], level, color.B, 0);
-                output.Bytes[k + 1] = ByteOp.WhenLevel(buffer.Bytes[k + 1], level, color.G, 0);
-                output.Bytes[k + 2] = ByteOp.WhenLevel(buffer.Bytes[k + 2], level, color.R, 0);
+                output.Bytes[k + 0] = ByteConversion.LevelSplit(buffer.Bytes[k + 0], level, color.B, 0);
+                output.Bytes[k + 1] = ByteConversion.LevelSplit(buffer.Bytes[k + 1], level, color.G, 0);
+                output.Bytes[k + 2] = ByteConversion.LevelSplit(buffer.Bytes[k + 2], level, color.R, 0);
                 output.Bytes[k + 3] = 255;
             }
             return output;
         }
-
         
         public static ImageBuffer Filter(this ImageBuffer buffer, ImageBuffer filter)
         {
             // The filter image determines the intensity for each pixel R,G,B
-            ImageBuffer output = buffer.Clone();
+            ImageBuffer output = buffer.CloneFormat();
 
             for (int k = 0; k < buffer.Bytes.Length; k += 4)
             {
@@ -201,7 +198,7 @@ namespace ImageProcessing
             // http://en.wikipedia.org/wiki/Color_quantization
             byte[] bytes = buffer.Bytes;
 
-            ImageBuffer output = buffer.Clone();
+            ImageBuffer output = buffer.CloneFormat();
 
             int step = (256 / partitions);
             int half = (step / 2);
@@ -227,6 +224,5 @@ namespace ImageProcessing
 
         }
     }
-
     
 }

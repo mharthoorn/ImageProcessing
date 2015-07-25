@@ -12,7 +12,7 @@ namespace ImageProcessing
 
         public static ImageBuffer Fill(this ImageBuffer buffer, Color color)
         {
-            ImageBuffer output = buffer.Clone();
+            ImageBuffer output = buffer.CloneFormat();
             for (int k = 0; k < output.Bytes.Length; k += 4)
             {
                 output.Bytes[k + 0] = color.B;

@@ -41,19 +41,17 @@ namespace ImageApp
 
         private void Process(ImageBuffer original)
         {
-            ImageBuffer buffer;
+            box1.Display(original);
 
-            buffer = original.Fill(Color.Green);
-            box1.Display(buffer);
-
-            buffer = original.Fill(Css.ToColor("#8EF0FF"));
+            ImageBuffer buffer = original.GrayScale();
             box2.Display(buffer);
-            
-            buffer = original.GrayScale().LuminanceToColor(Color.LawnGreen);
-            box3.Display(buffer);
 
-            buffer = original.LuminanceToColor(Color.LawnGreen);
-            box4.Display(buffer);
+            ImageBuffer buffer2 = buffer.CreepArea(20);
+          
+            box3.Display(buffer2);
+
+            ImageBuffer buffer3 = buffer.NineColors();
+            box4.Display(buffer3);
         }
 
 

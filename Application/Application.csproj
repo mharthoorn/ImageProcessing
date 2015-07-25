@@ -59,14 +59,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ImageProcessing\BasicAssistFunctions.cs" />
+    <Compile Include="Framework\BasicAssistFunctions.cs" />
     <Compile Include="ImageProcessing\BasicFunctions.cs" />
-    <Compile Include="ImageProcessing\ByteOperation.cs" />
+    <Compile Include="Framework\ByteOperation.cs" />
     <Compile Include="ImageProcessing\Convolutions.cs" />
     <Compile Include="ImageProcessing\FredFuncties.cs" />
-    <Compile Include="ImageProcessing\ImageBuffer.cs" />
-    <Compile Include="Utils\Preview.cs" />
-    <Compile Include="Utils\PictureBoxExtensions.cs" />
+    <Compile Include="Framework\ImageBuffer.cs" />
+    <Compile Include="ImageProcessing\ImageCreep.cs" />
+    <Compile Include="ViewUtils\Preview.cs" />
+    <Compile Include="ViewUtils\PictureBoxExtensions.cs" />
     <Compile Include="ImageProcessing\ColorReduction.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>

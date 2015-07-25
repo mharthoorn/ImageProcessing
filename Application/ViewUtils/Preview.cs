@@ -40,10 +40,9 @@ namespace ImageApp
             }
         }
         
-
         public void Show()
         {
-            IEnumerable<string> files = Directory.EnumerateFiles(path);
+            IEnumerable<string> files = Directory.EnumerateFiles(path, "*.png");
             int i = 0;
             foreach (string file in files)
             {

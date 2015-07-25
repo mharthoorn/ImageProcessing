@@ -12,14 +12,14 @@ namespace ImageProcessing
        
         public static ImageBuffer Add(params ImageBuffer[] buffers)
         {
-            ImageBuffer output = buffers[0].Clone();
+            ImageBuffer output = buffers[0].CloneFormat();
             for (int k = 0; k < output.Bytes.Length; k += 4)
             {
                 for (int i = 0; i < buffers.Count(); i++)
                 {
-                    output.Bytes[k + 0] = ByteOp.Max(output.Bytes[k + 0] + buffers[i].Bytes[k + 0]);
-                    output.Bytes[k + 1] = ByteOp.Max(output.Bytes[k + 1] + buffers[i].Bytes[k + 1]);
-                    output.Bytes[k + 2] = ByteOp.Max(output.Bytes[k + 2] + buffers[i].Bytes[k + 2]);
+                    output.Bytes[k + 0] = ByteConversion.Max(output.Bytes[k + 0] + buffers[i].Bytes[k + 0]);
+                    output.Bytes[k + 1] = ByteConversion.Max(output.Bytes[k + 1] + buffers[i].Bytes[k + 1]);
+                    output.Bytes[k + 2] = ByteConversion.Max(output.Bytes[k + 2] + buffers[i].Bytes[k + 2]);
                     output.Bytes[k + 3] = 255;
                 }
 
@@ -29,12 +29,12 @@ namespace ImageProcessing
 
         public static ImageBuffer SuperImpoze(this ImageBuffer image, ImageBuffer impoze)
         {
-            ImageBuffer output = image.Copy();
+            ImageBuffer output = image.Clone();
             for (int k = 0; k < output.Bytes.Length; k += 4)
             {
-                output.Bytes[k + 0] = ByteOp.WhenLevel(impoze.Bytes[k + 0], 1, output.Bytes[k + 0]);
-                output.Bytes[k + 1] = ByteOp.WhenLevel(impoze.Bytes[k + 1], 1, output.Bytes[k + 1]);
-                output.Bytes[k + 2] = ByteOp.WhenLevel(impoze.Bytes[k + 2], 1, output.Bytes[k + 2]);
+                output.Bytes[k + 0] = ByteConversion.MinAtLevel(impoze.Bytes[k + 0], 1, output.Bytes[k + 0]);
+                output.Bytes[k + 1] = ByteConversion.MinAtLevel(impoze.Bytes[k + 1], 1, output.Bytes[k + 1]);
+                output.Bytes[k + 2] = ByteConversion.MinAtLevel(impoze.Bytes[k + 2], 1, output.Bytes[k + 2]);
                 output.Bytes[k + 3] = 255;
 
             }
