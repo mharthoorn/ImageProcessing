@@ -63,6 +63,7 @@
     <Compile Include="ImageProcessing\BasicFunctions.cs" />
     <Compile Include="Framework\ByteOperation.cs" />
     <Compile Include="ImageProcessing\Convolutions.cs" />
+    <Compile Include="ImageProcessing\Coordinate.cs" />
     <Compile Include="ImageProcessing\FredFuncties.cs" />
     <Compile Include="Framework\ImageBuffer.cs" />
     <Compile Include="ImageProcessing\ImageCreep.cs" />

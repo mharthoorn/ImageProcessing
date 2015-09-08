@@ -8,34 +8,22 @@ namespace ImageApp
 {
     public partial class Form1 : Form
     {
-        // Gezamelijke directory voor opslaan van plaatjes.
-        // Voorlopig gekozen voor ...\MyDocuments\ImageProcessing
-
         public Form1()
         {
             InitializeComponent();
+            InitPreview(@"..\..\..\SampleImages");
+        }
 
-            string mydocuments = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-            string folder = Path.Combine(mydocuments, "ImageProcessing");
-
-            Preview preview = new Preview(this, 50, 50, folder);
+        private void InitPreview(string folder)
+        {
+            var preview = new FolderPreview(this, 50, 50, folder);
             preview.Show();
             preview.ImageClick += Preview_ImageClick;
         }
 
-        private void ClearBoxes()
-        {
-            box1.Image = null;
-            box2.Image = null;
-            box3.Image = null;
-            box4.Image = null;
-        }
-
         private void Preview_ImageClick(Image image)
         {
-            ClearBoxes();
-
-            ImageBuffer buffer = Preview.CroppedBitmap(image, 400).ToImageBuffer();
+            ImageBuffer buffer = FolderPreview.CroppedBitmap(image, 400).ToImageBuffer();
             Process(buffer);
         }
 
@@ -50,10 +38,9 @@ namespace ImageApp
           
             box3.Display(buffer2);
 
-            ImageBuffer buffer3 = buffer.NineColors();
+            ImageBuffer buffer3 = buffer2.Kirsch();
             box4.Display(buffer3);
         }
-
 
     }
 }

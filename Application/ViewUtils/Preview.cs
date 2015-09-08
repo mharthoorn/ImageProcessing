@@ -12,21 +12,20 @@ namespace ImageApp
 
     public delegate void ImageEvent(Image image);
 
-    public class Preview
+    public class FolderPreview
     {
         int top;
         int left;
-        string path;
+        string folder;
         Control parent;
 
-        public Preview(Control parent, int left, int top, string path)
+        public FolderPreview(Control parent, int left, int top, string folder)
         {
             this.parent = parent;
             this.top = top;
             this.left = left;
-            this.path = path;
+            this.folder = folder;
         }
-
         
         public event ImageEvent ImageClick;
 
@@ -42,7 +41,7 @@ namespace ImageApp
         
         public void Show()
         {
-            IEnumerable<string> files = Directory.EnumerateFiles(path, "*.png");
+            IEnumerable<string> files = Directory.EnumerateFiles(folder, "*.png");
             int i = 0;
             foreach (string file in files)
             {

@@ -6,6 +6,8 @@ using System.Runtime.InteropServices;
 namespace ImageProcessing
 {
 
+
+
     public class ImageBuffer // Mathematically Processable Image Pixel Buffer 
     {
         public int Width;
@@ -89,11 +91,18 @@ namespace ImageProcessing
         }
     }
 
-   
 
-    public static class BufferExtensions
+    /// <summary>
+    ///  A function that takes an <see cref="ImageBuffer"/> as input and outputs a new or modified <see cref="ImageBuffer"/>, so that you
+    /// can chain (pipeline) them
+    /// </summary>
+    /// <param name="buffer">Input buffer</param>
+    /// <returns>Output buffer</returns>
+    public delegate ImageBuffer Pipeline(ImageBuffer buffer);
+
+    public static class ImageBufferExtensions
     {
-        
+        static Func<ImageBuffer, ImageBuffer> pipe;
 
         public static ImageBuffer ToImageBuffer(this Bitmap bitmap)
         {
@@ -101,7 +110,10 @@ namespace ImageProcessing
             
         }
 
-        public static ImageBuffer When(this ImageBuffer buffer, bool condition, Func<ImageBuffer, ImageBuffer> action)
+        /// <summary>
+        /// A fluent if-statement that only puts the <see cref="ImageBuffer"/> through the pipeline when the <see cref="condition"/> is met
+        /// </summary>
+        public static ImageBuffer When(this ImageBuffer buffer, bool condition, Pipeline action)
         {
             if (condition)
             {

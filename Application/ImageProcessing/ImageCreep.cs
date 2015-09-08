@@ -1,10 +1,35 @@
 using System;
+using System.Collections.Generic;
 using System.Drawing;
 
 namespace ImageProcessing
 {
+
     public static partial class ImageCreep
     {
+
+        private static int Index(this ImageBuffer buffer, Coordinate coord)
+        {
+            return (coord.X * 4) + (coord.Y * buffer.Stride);
+        }
+
+        public static ImageBuffer MapAndAverage(this ImageBuffer buffer, int x, int y)
+        {
+            var map = buffer.CloneFormat().Fill(Color.FromArgb(0));
+            var work = new List<Coordinate>();
+            var clone = buffer.Clone();
+
+            var origin = new Coordinate(x, y);
+
+            int i = map.Index(origin);
+            map.Bytes[i] = 1;
+
+
+            int j = map.Index(origin.Right());
+
+            return map;
+        }
+
         public static void AverageOut(this byte[] buffer, int p1, int p2)
         {
             int d = Math.Abs(buffer[p1] - buffer[p2]);
